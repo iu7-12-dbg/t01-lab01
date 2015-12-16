@@ -8,7 +8,8 @@ namespace Core
         int Capacity { get; set; }
         void EnsureCapacity(int value);
         T this[int index] { get; set; }
-        void Add(T value);
+        void Push(T value);
+        T Pop();
         T[] Data { get; }
     }
 
@@ -57,8 +58,11 @@ namespace Core
             set { data[index] = value; }
         }
 
-        public void Add(T value)
+        public void Push(T value)
         { data[size++] = value; }
+
+        public T Pop()
+        { return data[size--]; }
 
         public T[] Data { get { return data; } }
     }
