@@ -62,6 +62,30 @@
             Max.Set(SysMath.Max(Max.X, p.X), SysMath.Max(Max.Y, p.Y));
         }
 
+        public void Shrink(double s)
+        {
+            Min += s;
+            Max -= s;
+        }
+
+        public void Shrink(Vector2 s)
+        {
+            Min += s;
+            Max -= s;
+        }
+
+        public void Grow(double s)
+        {
+            Min -= s;
+            Max += s;
+        }
+
+        public void Grow(Vector2 s)
+        {
+            Min -= s;
+            Max += s;
+        }
+
         public static readonly Box2 Empty = new Box2(Vector2.MaxValue, Vector2.MinValue);
     }
 }
