@@ -59,7 +59,11 @@ namespace Core
         }
 
         public void Push(T value)
-        { data[size++] = value; }
+        {
+            if (Capacity==size)
+                Capacity *= 2;
+            data[size++] = value;
+        }
 
         public T Pop()
         { return data[size--]; }
