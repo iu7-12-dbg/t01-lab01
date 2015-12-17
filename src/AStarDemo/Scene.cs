@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Collections.Generic;
 using Core.Math;
 
@@ -7,6 +8,16 @@ namespace AStarDemo
     public sealed class SceneOptions
     {
         public bool ShowObjectLocations;
+    }
+
+    public sealed class SceneColors
+    {
+        public Color TempEdge = Color.DarkGray;
+        public Color Edge = Color.CornflowerBlue;
+        public Color TempVertex = Color.DarkGray;
+        public Color Vertex = Color.Black;
+        public Color SelectedObject = Color.Red;
+        public Color SelectionBox = Color.Black;
     }
 
     internal sealed class Scene : IDisposable
@@ -28,6 +39,7 @@ namespace AStarDemo
         }
 
         public readonly SceneOptions Options;
+        public readonly SceneColors Colors;
         public ITool CurrentTool;
         public readonly SortedSet<SceneObject> Objects;
         private readonly SceneObjectComparer comparer;
@@ -36,6 +48,7 @@ namespace AStarDemo
         public Scene()
         {
             Options = new SceneOptions();
+            Colors = new SceneColors();
             comparer = new SceneObjectComparer();
             Objects = new SortedSet<SceneObject>(comparer);
         }

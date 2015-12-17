@@ -77,7 +77,7 @@ namespace AStarDemo
                 vertex.Location = pos;
                 if (release)
                 {
-                    vertex.Color = Color.DarkGray;
+                    vertex.Color = Root.Scene.Colors.Vertex;
                     vertex.ShowLocation = false;
                     Root.Scene.Objects.Add(vertex);
                 }
@@ -104,7 +104,7 @@ namespace AStarDemo
                 {
                     if (snap)
                     {
-                        edge.Color = Color.LightGray;
+                        edge.Color = Root.Scene.Colors.Edge;
                         Root.Scene.Objects.Add(edge);
                     }
                     else // drop invalid edge, but dispose it first

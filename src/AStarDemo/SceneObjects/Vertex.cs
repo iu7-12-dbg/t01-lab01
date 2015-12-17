@@ -18,7 +18,7 @@ namespace AStarDemo.SceneObjects
             if (refCount++==0)
                 brush = new SolidBrush(Color.Black);
             Radius = 2.0f;
-            Color = Color.Black;
+            Color = Root.Scene.Colors.TempVertex;
             ZOrder = SceneObjectConstants.VertexZOrder;
             ShowLocation = false;
         }
@@ -28,7 +28,7 @@ namespace AStarDemo.SceneObjects
             var invScale = 1/renderer.Scale;
             var d = (float)(2*Radius*invScale);
             var r = d/2;
-            brush.Color = Selected ? Color.Red : Color;
+            brush.Color = Selected ? Root.Scene.Colors.SelectedObject : Color;
             graphics.FillEllipse(brush, (float)Location.X-r, (float)Location.Y-r, d, d);
             if (ShowLocation || Root.Scene.Options.ShowObjectLocations)
             {

@@ -16,7 +16,7 @@ namespace AStarDemo.Tools
         public Select()
         {
             // XXX: dispose!
-            dottedPen = new Pen(Color.Black);
+            dottedPen = new Pen(Root.Scene.Colors.SelectionBox);
             dottedPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
         }
 

@@ -17,7 +17,7 @@ namespace AStarDemo.SceneObjects
         {
             if (refCount++==0)
                 pen = new Pen(Color.Black);
-            Color = Color.CornflowerBlue;
+            Color = Root.Scene.Colors.TempEdge;
             Thickness = 2.0f;
             A = edge.A;
             B = edge.B;
@@ -27,7 +27,7 @@ namespace AStarDemo.SceneObjects
         public override void Draw(Renderer renderer, Graphics graphics)
         {
             var invScale = 1/renderer.Scale;
-            pen.Color = Selected ? Color.Red : Color;
+            pen.Color = Selected ? Root.Scene.Colors.SelectedObject : Color;
             pen.Width = (float)(Thickness*invScale);
             graphics.DrawLine(pen, (float)A.X, (float)A.Y, (float)B.X, (float)B.Y);
         }
