@@ -9,9 +9,10 @@
         public Color Color;
         public bool Visible = true;
         public bool Selected;
+        public int Id;
         public int GroupId;
 
-        public abstract void Draw(Graphics g);
+        public abstract void Draw(Renderer r, Graphics g);
         public abstract Box2 GetBBox();
     }
 }

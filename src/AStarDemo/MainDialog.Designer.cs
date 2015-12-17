@@ -88,7 +88,6 @@ namespace AStarDemo
             this.btnSelect.TabIndex = 30;
             this.btnSelect.Text = "S";
             this.btnSelect.UseVisualStyleBackColor = false;
-            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
             // btnAdd
             // 
@@ -101,7 +100,6 @@ namespace AStarDemo
             this.btnAdd.TabIndex = 29;
             this.btnAdd.Text = "A";
             this.btnAdd.UseVisualStyleBackColor = false;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnUndo
             // 
@@ -123,6 +121,9 @@ namespace AStarDemo
             this.pbDrawingSurface.Size = new System.Drawing.Size(620, 389);
             this.pbDrawingSurface.TabIndex = 0;
             this.pbDrawingSurface.TabStop = false;
+            this.pbDrawingSurface.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbDrawingSurface_MouseDown);
+            this.pbDrawingSurface.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbDrawingSurface_MouseMove);
+            this.pbDrawingSurface.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pbDrawingSurface_MouseUp);
             // 
             // scFooter
             // 
