@@ -14,7 +14,7 @@ namespace AStarDemo.SceneObjects
         public Edge(MEdge edge)
         {
             Color = Color.CornflowerBlue;
-            Thickness = 1.0F;
+            Thickness = 2.0f;
             A = edge.A;
             B = edge.B;
             ZOrder = SceneObjectConstants.EdgeZOrder;
@@ -22,8 +22,8 @@ namespace AStarDemo.SceneObjects
 
         public override void Draw(Renderer renderer, Graphics graphics)
         {
-            //renderer.Scale
-            var pen = new Pen(Selected ? Color.Red : Color, Thickness);
+            var invScale = 1/renderer.Scale;
+            var pen = new Pen(Selected ? Color.Red : Color, (float)(Thickness*invScale));
             graphics.DrawLine(pen, (float)A.X, (float)A.Y, (float)B.X, (float)B.Y);
             pen.Dispose();
         }

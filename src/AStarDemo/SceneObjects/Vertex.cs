@@ -22,15 +22,16 @@ namespace AStarDemo.SceneObjects
         {
             using (var brush = new SolidBrush(Selected ? Color.Red : Color))
             {
-                graphics.FillEllipse(brush, (float)Location.X-Radius, (float)Location.Y-Radius, 2*Radius, 2*Radius);
+                var invScale = 1/renderer.Scale;
+                var d = (float)(2*Radius*invScale);
+                var r = d/2;
+                graphics.FillEllipse(brush, (float)Location.X-r, (float)Location.Y-r, d, d);
                 if (ShowLocation)
                 {
                     var gTransform = graphics.Transform;
                     graphics.ResetTransform();
                     var myTransform = Matrix23.FromColumns(gTransform.Elements);
-                    var pos = myTransform*Location;
-                    myTransform = Matrix23.Scaling(myTransform.Scale);
-                    pos += myTransform * new Vector2(Radius, Radius);
+                    var pos = myTransform*(Location+d);
                     var str = Location.ToString();
                     var strRect = graphics.MeasureString(str, renderer.Font);
                     graphics.FillRectangle(renderer.FontBackgroundBrush, (float)pos.X, (float)pos.Y,
