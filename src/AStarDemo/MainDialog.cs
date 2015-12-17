@@ -32,6 +32,7 @@ namespace AStarDemo
         {
             KeyPreview = true;
             InitializeComponent();
+            InitializeObjectSelector();
             tools = new Dictionary<ToolId, ToolContainer>();
             InitializeToolButton(new ToolContainer(new Tools.Add(), btnAdd));
             InitializeToolButton(new ToolContainer(new Tools.Select(), btnSelect));
@@ -39,6 +40,19 @@ namespace AStarDemo
             MouseWheel += OnMouseWheel;
             Root.Scene.Objects.Add(new SceneObjects.Background(Color.White));
             Root.Renderer.RenderingOutput = pbDrawingSurface;
+        }
+
+        private void InitializeObjectSelector()
+        {
+            btnObject.ImageList = new ImageList();
+            btnObject.ImageList.Images.AddStrip(Properties.Resources.Objects);
+            btnObject.ImageIndex = 0;
+            btnObject.Text = String.Empty;
+            btnObject.Click += (sender, e) =>
+            {
+                // XXX: implement object type switching
+                // btnObject.ImageIndex = (btnObject.ImageIndex+1)%2;
+            };
         }
 
         private void InitializeToolButton(ToolContainer toolContainer)

@@ -32,6 +32,7 @@ namespace AStarDemo
         private void InitializeComponent()
         {
             this.scToolPanel = new System.Windows.Forms.SplitContainer();
+            this.btnObject = new System.Windows.Forms.Button();
             this.btnSelect = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnUndo = new System.Windows.Forms.Button();
@@ -60,6 +61,7 @@ namespace AStarDemo
             // 
             // scToolPanel.Panel1
             // 
+            this.scToolPanel.Panel1.Controls.Add(this.btnObject);
             this.scToolPanel.Panel1.Controls.Add(this.btnSelect);
             this.scToolPanel.Panel1.Controls.Add(this.btnAdd);
             this.scToolPanel.Panel1.Controls.Add(this.btnUndo);
@@ -76,6 +78,18 @@ namespace AStarDemo
             this.scToolPanel.SplitterDistance = 25;
             this.scToolPanel.SplitterWidth = 1;
             this.scToolPanel.TabIndex = 1;
+            // 
+            // btnObject
+            // 
+            this.btnObject.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(185)))), ((int)(((byte)(185)))), ((int)(((byte)(185)))));
+            this.btnObject.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnObject.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World, ((byte)(204)));
+            this.btnObject.Location = new System.Drawing.Point(48, 4);
+            this.btnObject.Name = "btnObject";
+            this.btnObject.Size = new System.Drawing.Size(21, 21);
+            this.btnObject.TabIndex = 31;
+            this.btnObject.Text = "O";
+            this.btnObject.UseVisualStyleBackColor = false;
             // 
             // btnSelect
             // 
@@ -104,7 +118,7 @@ namespace AStarDemo
             // btnUndo
             // 
             this.btnUndo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World, ((byte)(204)));
-            this.btnUndo.Location = new System.Drawing.Point(47, 3);
+            this.btnUndo.Location = new System.Drawing.Point(75, 3);
             this.btnUndo.Name = "btnUndo";
             this.btnUndo.Size = new System.Drawing.Size(50, 23);
             this.btnUndo.TabIndex = 28;
@@ -190,5 +204,6 @@ namespace AStarDemo
         private Button btnUndo;
         private Button btnAdd;
         private Button btnSelect;
+        private Button btnObject;
     }
 }
