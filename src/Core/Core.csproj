@@ -46,6 +46,7 @@
     <Compile Include="Math\Circle.cs" />
     <Compile Include="Math\Box2.cs" />
     <Compile Include="Math\Edge.cs" />
+    <Compile Include="Math\Extensions.cs" />
     <Compile Include="Math\Matrix23.cs" />
     <Compile Include="Math\Ray.cs" />
     <Compile Include="Math\Rectangle.cs" />
