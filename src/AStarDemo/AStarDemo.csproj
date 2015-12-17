@@ -59,6 +59,8 @@
     <Compile Include="Root.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SceneObject.cs" />
+    <Compile Include="SceneObjects\Edge.cs" />
+    <Compile Include="SceneObjects\Vertex.cs" />
     <EmbeddedResource Include="MainDialog.resx">
       <DependentUpon>MainDialog.cs</DependentUpon>
     </EmbeddedResource>
