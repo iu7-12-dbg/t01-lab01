@@ -56,7 +56,7 @@
         public bool Contains(Box2 b)
         { return Contains(b.Min) && Contains(b.Max); }
 
-        public void Include(Vector2 p)
+        public void Merge(Vector2 p)
         {
             Min.Set(SysMath.Min(Min.X, p.X), SysMath.Min(Min.Y, p.Y));
             Max.Set(SysMath.Max(Max.X, p.X), SysMath.Max(Max.Y, p.Y));
