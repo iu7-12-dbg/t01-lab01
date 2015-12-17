@@ -46,7 +46,7 @@ namespace AStarDemo.SceneObjects
         }
 
         public override Box2 GetBBox()
-        { return new Box2(Location, Radius); }
+        { return new Box2(Location, 0); }
 
         protected override void PureDispose()
         {
