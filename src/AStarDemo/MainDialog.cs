@@ -91,6 +91,19 @@ namespace AStarDemo
         private void RedrawScene()
         { pbDrawingSurface.Invalidate(); }
 
+        private Vector2 ScreenToWorld(Point screenPos)
+        {
+            var invScale = 1/Root.Renderer.Scale;
+            var invOffset = -Root.Renderer.Offset;
+            var clSize = Root.Renderer.RenderingOutput.ClientSize;
+            screenPos.X -= clSize.Width/2;
+            screenPos.Y -= clSize.Height/2;
+            var pos = new Vector2(screenPos.X, -screenPos.Y);
+            pos *= invScale;
+            pos += invOffset;
+            return pos;
+        }
+
         private void pbDrawingSurface_MouseDown(object sender, MouseEventArgs args)
         {
             switch (args.Button)
@@ -104,7 +117,7 @@ namespace AStarDemo
                 break;
             case MouseButtons.Left:
                 toolActive = true;
-                GetCurrentTool().Begin(new Vector2(args.Location.X, -args.Location.Y));
+                GetCurrentTool().Begin(ScreenToWorld(args.Location));
                 break;
             }
         }
@@ -129,7 +142,10 @@ namespace AStarDemo
                 break;
             case MouseButtons.Left:
                 if (toolActive)
-                    GetCurrentTool().Update(new Vector2(args.Location.X, -args.Location.Y));
+                {
+                    GetCurrentTool().Update(ScreenToWorld(args.Location));
+                    RedrawScene();
+                }
                 break;
             }
         }
@@ -146,7 +162,10 @@ namespace AStarDemo
                 break;
             case MouseButtons.Left:
                 if (toolActive)
-                    GetCurrentTool().End(new Vector2(args.Location.X, -args.Location.Y));
+                {
+                    GetCurrentTool().End(ScreenToWorld(args.Location));
+                    RedrawScene();
+                }
                 break;
             }
         }
