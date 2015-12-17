@@ -9,6 +9,21 @@ namespace AStarDemo
 {
     public partial class MainDialog : Form
     {
+        private class ToolContainer
+        {
+            public ITool Tool;
+            public Button Button;
+
+            public ToolContainer(ITool tool, Button btn)
+            {
+                Tool = tool;
+                Button = btn;
+            }
+        }
+        private ToolId currentTool = ToolId.Select;
+        private bool toolActive;
+        private Dictionary<ToolId, ToolContainer> tools;
+
         private bool trackingOffset;
         private Vector2 prevPos;
         private const double ScaleDelta = 1.25f;
@@ -17,9 +32,34 @@ namespace AStarDemo
         {
             KeyPreview = true;
             InitializeComponent();
+            tools = new Dictionary<ToolId, ToolContainer>();
+            InitializeToolButton(new ToolContainer(new Tools.Add(), btnAdd));
+            InitializeToolButton(new ToolContainer(new Tools.Select(), btnSelect));
+            SetCurrentTool(currentTool, true);
             MouseWheel += OnMouseWheel;
             Root.Scene.Objects.Add(new SceneObjects.Background(Color.White));
             Root.Renderer.RenderingOutput = pbDrawingSurface;
+        }
+
+        private void InitializeToolButton(ToolContainer toolContainer)
+        {
+            var list = new ImageList();
+            list.Images.AddStrip(toolContainer.Tool.Icons);
+            toolContainer.Button.ImageList = list;
+            toolContainer.Button.Text = string.Empty;
+            toolContainer.Button.Click += (sender, e) => SetCurrentTool(toolContainer.Tool.Id);
+            tools.Add(toolContainer.Tool.Id, toolContainer);
+        }
+
+        private bool SetCurrentTool(ToolId id, bool force = false)
+        {
+            if (!force && currentTool==id)
+                return false;
+            currentTool = id;
+            foreach (var tc in tools.Values)
+                tc.Button.ImageIndex = (int)ToolState.Inactive;
+            tools[id].Button.ImageIndex = (int)ToolState.Active;
+            return true;
         }
 
         private void OnMouseWheel(object sender, MouseEventArgs args)
@@ -45,6 +85,7 @@ namespace AStarDemo
                 prevPos = new Vector2(args.Location.X, -args.Location.Y);
                 break;
             case MouseButtons.Left:
+                toolActive = true;
                 // XXX: notify tool
                 break;
             }
@@ -69,7 +110,10 @@ namespace AStarDemo
                 }
                 break;
             case MouseButtons.Left:
-                // XXX: notify tool
+                if (toolActive)
+                {
+                    // XXX: notify tool
+                }
                 break;
             }
         }
@@ -85,7 +129,10 @@ namespace AStarDemo
                 trackingOffset = false;
                 break;
             case MouseButtons.Left:
-                // XXX: notify tool
+                if (toolActive)
+                {
+                    // XXX: notify tool
+                }
                 break;
             }
         }
