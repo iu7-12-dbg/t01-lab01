@@ -62,6 +62,12 @@
             Max.Set(SysMath.Max(Max.X, p.X), SysMath.Max(Max.Y, p.Y));
         }
 
+        public void Merge(Box2 b)
+        {
+            Merge(b.Min);
+            Merge(b.Max);
+        }
+
         public void Shrink(double s)
         {
             Min += s;
