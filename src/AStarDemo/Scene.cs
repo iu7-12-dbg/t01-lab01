@@ -21,6 +21,7 @@ namespace AStarDemo
             }
         }
 
+        public ITool CurrentTool;
         public readonly SortedSet<SceneObject> Objects;
         private readonly SceneObjectComparer comparer;
 

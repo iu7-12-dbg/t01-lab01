@@ -128,6 +128,8 @@ namespace AStarDemo
                     sceneObject.Draw(this, graphics);
             }
             DrawCartesianOrigin(graphics);
+            if (scene.CurrentTool!=null)
+                scene.CurrentTool.Draw(this, graphics);
             graphics.ResetTransform();
             timer.Stop();
             DrawStats(graphics, timer.Elapsed.TotalMilliseconds);

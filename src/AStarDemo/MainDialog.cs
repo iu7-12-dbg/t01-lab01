@@ -70,11 +70,15 @@ namespace AStarDemo
             if (!force && currentTool==id)
                 return false;
             currentTool = id;
+            Root.Scene.CurrentTool = GetCurrentTool();
             foreach (var tc in tools.Values)
                 tc.Button.ImageIndex = (int)ToolState.Inactive;
             tools[id].Button.ImageIndex = (int)ToolState.Active;
             return true;
         }
+
+        private ITool GetCurrentTool()
+        { return tools[currentTool].Tool; }
 
         private void OnMouseWheel(object sender, MouseEventArgs args)
         {
@@ -100,7 +104,7 @@ namespace AStarDemo
                 break;
             case MouseButtons.Left:
                 toolActive = true;
-                // XXX: notify tool
+                GetCurrentTool().Begin(new Vector2(args.Location.X, -args.Location.Y));
                 break;
             }
         }
@@ -125,9 +129,7 @@ namespace AStarDemo
                 break;
             case MouseButtons.Left:
                 if (toolActive)
-                {
-                    // XXX: notify tool
-                }
+                    GetCurrentTool().Update(new Vector2(args.Location.X, -args.Location.Y));
                 break;
             }
         }
@@ -144,9 +146,7 @@ namespace AStarDemo
                 break;
             case MouseButtons.Left:
                 if (toolActive)
-                {
-                    // XXX: notify tool
-                }
+                    GetCurrentTool().End(new Vector2(args.Location.X, -args.Location.Y));
                 break;
             }
         }
