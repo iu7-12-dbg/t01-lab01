@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace AStarDemo
 {
-    internal sealed class Scene
+    internal sealed class Scene : IDisposable
     {
         private sealed class SceneObjectComparer : IComparer<SceneObject>
         {
@@ -24,6 +24,7 @@ namespace AStarDemo
         public ITool CurrentTool;
         public readonly SortedSet<SceneObject> Objects;
         private readonly SceneObjectComparer comparer;
+        private bool disposed = false;
 
         public Scene()
         {
@@ -48,6 +49,30 @@ namespace AStarDemo
                 if (obj.GroupId==groupId)
                     action(obj);
             }
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    foreach (var obj in Objects)
+                        obj.Dispose();
+                    Objects.Clear();
+                }
+                DisposeHelper.OnDispose<Scene>(disposing);
+                disposed = true;
+            }
+        }
+
+        ~Scene()
+        { Dispose(false); }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }
