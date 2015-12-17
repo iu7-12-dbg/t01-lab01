@@ -50,7 +50,16 @@ namespace AStarDemo
             case 0: // vertex
                 return new SceneObjects.Vertex {Location = pos, ShowLocation = true};
             case 1: // edge
-                return new SceneObjects.Edge(new Edge(pos, pos));
+            {
+                var treshold = 3/Root.Renderer.Scale;
+                foreach (var obj in Root.Scene.Query(new Box2(pos, treshold)))
+                {
+                    var v = obj as SceneObjects.Vertex;
+                    if (v!=null) // snap to vertices only
+                        return new SceneObjects.Edge(new Edge(v.Location, v.Location));
+                }
+                return null;
+            }
             default: // unknown
                 return null;
             }
@@ -76,11 +85,28 @@ namespace AStarDemo
             {
                 Debug.Assert(obj is SceneObjects.Edge);
                 var edge = (SceneObjects.Edge)obj;
+                var treshold = 3/Root.Renderer.Scale;
+                bool snap = false;
+                foreach (var qobj in Root.Scene.Query(new Box2(pos, treshold)))
+                {
+                    var v = qobj as SceneObjects.Vertex;
+                    if (v!=null) // snap to vertices only
+                    {
+                        pos = v.Location;
+                        snap = true;
+                        break;
+                    }
+                }
                 edge.B = pos;
                 if (release)
                 {
-                    edge.Color = Color.LightGray;
-                    Root.Scene.Objects.Add(edge);
+                    if (snap)
+                    {
+                        edge.Color = Color.LightGray;
+                        Root.Scene.Objects.Add(edge);
+                    }
+                    else // drop invalid edge, but dispose it first
+                        edge.Dispose();
                 }
                 break;
             }

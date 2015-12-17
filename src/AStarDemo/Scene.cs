@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Core.Math;
 
 namespace AStarDemo
 {
@@ -48,6 +49,16 @@ namespace AStarDemo
             {
                 if (obj.GroupId==groupId)
                     action(obj);
+            }
+        }
+
+        public IEnumerable<SceneObject> Query(Box2 box)
+        {
+            // XXX: could be optimized
+            foreach (var obj in Objects)
+            {
+                if (box.Contains(obj.GetBBox()))
+                    yield return obj;
             }
         }
 
