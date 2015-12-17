@@ -31,11 +31,14 @@
             if (!disposed)
             {
                 if (disposing)
-                    handle.Free();
+                    PureDispose();
                 DisposeHelper.OnDispose<SceneObject>(disposing);
                 disposed = true;
             }
         }
+
+        protected virtual void PureDispose()
+        { handle.Free(); }
         
         ~SceneObject()
         { Dispose(false); }

@@ -10,9 +10,13 @@ namespace AStarDemo.SceneObjects
         public Vector2 A;
         public Vector2 B;
         public float Thickness;
-
+        private static Pen pen;
+        private static long refCount = 0;
+        
         public Edge(MEdge edge)
         {
+            if (refCount++==0)
+                pen = new Pen(Color.Black);
             Color = Color.CornflowerBlue;
             Thickness = 2.0f;
             A = edge.A;
@@ -23,9 +27,9 @@ namespace AStarDemo.SceneObjects
         public override void Draw(Renderer renderer, Graphics graphics)
         {
             var invScale = 1/renderer.Scale;
-            var pen = new Pen(Selected ? Color.Red : Color, (float)(Thickness*invScale));
+            pen.Color = Selected ? Color.Red : Color;
+            pen.Width = (float)(Thickness*invScale);
             graphics.DrawLine(pen, (float)A.X, (float)A.Y, (float)B.X, (float)B.Y);
-            pen.Dispose();
         }
 
         public override Box2 GetBBox()
@@ -39,5 +43,15 @@ namespace AStarDemo.SceneObjects
 
         public static implicit operator MEdge(Edge src)
         { return new MEdge(src.A, src.B); }
+
+        protected override void PureDispose()
+        {
+            if (--refCount==0)
+            {
+                pen.Dispose();
+                pen = null;
+            }
+            base.PureDispose();
+        }
     }
 }
