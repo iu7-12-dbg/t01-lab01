@@ -35,10 +35,10 @@ namespace AStarDemo
             this.btnObject = new System.Windows.Forms.Button();
             this.btnSelect = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.btnUndo = new System.Windows.Forms.Button();
             this.pbDrawingSurface = new System.Windows.Forms.PictureBox();
             this.scFooter = new System.Windows.Forms.SplitContainer();
             this.lStatus = new System.Windows.Forms.Label();
+            this.btnLocToggle = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.scToolPanel)).BeginInit();
             this.scToolPanel.Panel1.SuspendLayout();
             this.scToolPanel.Panel2.SuspendLayout();
@@ -61,10 +61,10 @@ namespace AStarDemo
             // 
             // scToolPanel.Panel1
             // 
+            this.scToolPanel.Panel1.Controls.Add(this.btnLocToggle);
             this.scToolPanel.Panel1.Controls.Add(this.btnObject);
             this.scToolPanel.Panel1.Controls.Add(this.btnSelect);
             this.scToolPanel.Panel1.Controls.Add(this.btnAdd);
-            this.scToolPanel.Panel1.Controls.Add(this.btnUndo);
             this.scToolPanel.Panel1.Margin = new System.Windows.Forms.Padding(4);
             this.scToolPanel.Panel1.Padding = new System.Windows.Forms.Padding(2);
             this.scToolPanel.Panel1MinSize = 24;
@@ -115,16 +115,6 @@ namespace AStarDemo
             this.btnAdd.Text = "A";
             this.btnAdd.UseVisualStyleBackColor = false;
             // 
-            // btnUndo
-            // 
-            this.btnUndo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World, ((byte)(204)));
-            this.btnUndo.Location = new System.Drawing.Point(75, 3);
-            this.btnUndo.Name = "btnUndo";
-            this.btnUndo.Size = new System.Drawing.Size(50, 23);
-            this.btnUndo.TabIndex = 28;
-            this.btnUndo.Text = "Undo";
-            this.btnUndo.UseVisualStyleBackColor = true;
-            // 
             // pbDrawingSurface
             // 
             this.pbDrawingSurface.BackColor = System.Drawing.Color.White;
@@ -172,6 +162,18 @@ namespace AStarDemo
             this.lStatus.Text = "<status>";
             this.lStatus.Visible = false;
             // 
+            // btnLocToggle
+            // 
+            this.btnLocToggle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(185)))), ((int)(((byte)(185)))), ((int)(((byte)(185)))));
+            this.btnLocToggle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLocToggle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World, ((byte)(204)));
+            this.btnLocToggle.Location = new System.Drawing.Point(75, 4);
+            this.btnLocToggle.Name = "btnLocToggle";
+            this.btnLocToggle.Size = new System.Drawing.Size(21, 21);
+            this.btnLocToggle.TabIndex = 32;
+            this.btnLocToggle.Text = "L";
+            this.btnLocToggle.UseVisualStyleBackColor = false;
+            // 
             // MainDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -201,9 +203,9 @@ namespace AStarDemo
         private System.Windows.Forms.PictureBox pbDrawingSurface;
         private SplitContainer scFooter;
         private Label lStatus;
-        private Button btnUndo;
         private Button btnAdd;
         private Button btnSelect;
         private Button btnObject;
+        private Button btnLocToggle;
     }
 }

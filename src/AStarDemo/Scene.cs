@@ -6,6 +6,11 @@ namespace AStarDemo
 {
     internal sealed class Scene : IDisposable
     {
+        public sealed class SceneOptions
+        {
+            public bool ShowObjectLocations;
+        }
+
         private sealed class SceneObjectComparer : IComparer<SceneObject>
         {
             public int Compare(SceneObject x, SceneObject y)
@@ -22,6 +27,7 @@ namespace AStarDemo
             }
         }
 
+        public readonly SceneOptions Options;
         public ITool CurrentTool;
         public readonly SortedSet<SceneObject> Objects;
         private readonly SceneObjectComparer comparer;
@@ -29,6 +35,7 @@ namespace AStarDemo
 
         public Scene()
         {
+            Options = new SceneOptions();
             comparer = new SceneObjectComparer();
             Objects = new SortedSet<SceneObject>(comparer);
         }

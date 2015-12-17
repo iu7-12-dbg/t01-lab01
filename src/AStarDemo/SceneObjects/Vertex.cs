@@ -20,7 +20,7 @@ namespace AStarDemo.SceneObjects
             Radius = 2.0f;
             Color = Color.Black;
             ZOrder = SceneObjectConstants.VertexZOrder;
-            ShowLocation = true;
+            ShowLocation = false;
         }
 
         public override void Draw(Renderer renderer, Graphics graphics)
@@ -30,7 +30,7 @@ namespace AStarDemo.SceneObjects
             var r = d/2;
             brush.Color = Selected ? Color.Red : Color;
             graphics.FillEllipse(brush, (float)Location.X-r, (float)Location.Y-r, d, d);
-            if (ShowLocation)
+            if (ShowLocation || Root.Scene.Options.ShowObjectLocations)
             {
                 var gTransform = graphics.Transform;
                 graphics.ResetTransform();

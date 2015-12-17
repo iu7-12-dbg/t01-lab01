@@ -34,6 +34,7 @@ namespace AStarDemo
             KeyPreview = true;
             InitializeComponent();
             InitializeObjectSelector();
+            InitializeLocationToggle();
             tools = new Dictionary<ToolId, ToolContainer>();
             InitializeToolButton(new ToolContainer(new Tools.Add(CreateObject, AdjustObject), btnAdd));
             InitializeToolButton(new ToolContainer(new Tools.Select(), btnSelect));
@@ -77,6 +78,7 @@ namespace AStarDemo
                 if (release)
                 {
                     vertex.Color = Color.DarkGray;
+                    vertex.ShowLocation = false;
                     Root.Scene.Objects.Add(vertex);
                 }
                 break;
@@ -125,6 +127,20 @@ namespace AStarDemo
             {
                 // XXX: implement object type switching
                 btnObject.ImageIndex = (btnObject.ImageIndex+1)%2;
+            };
+        }
+
+        private void InitializeLocationToggle()
+        {
+            btnLocToggle.ImageList = new ImageList();
+            btnLocToggle.ImageList.Images.AddStrip(Properties.Resources.Location);
+            btnLocToggle.ImageIndex = 1; // i.e. disabled
+            btnLocToggle.Text = String.Empty;
+            btnLocToggle.Click += (sender, e) =>
+            {
+                btnLocToggle.ImageIndex = (btnLocToggle.ImageIndex+1)%2;
+                Root.Scene.Options.ShowObjectLocations = btnLocToggle.ImageIndex==0;
+                RedrawScene();
             };
         }
 
