@@ -4,13 +4,13 @@ using Core.Math;
 
 namespace AStarDemo
 {
+    public sealed class SceneOptions
+    {
+        public bool ShowObjectLocations;
+    }
+
     internal sealed class Scene : IDisposable
     {
-        public sealed class SceneOptions
-        {
-            public bool ShowObjectLocations;
-        }
-
         private sealed class SceneObjectComparer : IComparer<SceneObject>
         {
             public int Compare(SceneObject x, SceneObject y)
