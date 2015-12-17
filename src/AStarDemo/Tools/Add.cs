@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using Core.Math;
 
 namespace AStarDemo.Tools
 {
@@ -8,17 +9,21 @@ namespace AStarDemo.Tools
         public ToolId Id { get { return ToolId.Add; } }
         public Bitmap Icons { get { return Properties.Resources.Add; } }
 
-        public void Begin(Graphics g, Point pos)
+        public void Begin(Vector2 pos)
         {
             // XXX: add & capture object
         }
-        public void Update(Graphics g, Point pos)
+        public void Update(Vector2 pos)
         {
             // XXX: move object
         }
-        public void End()
+        public void End(Vector2 pos)
         {
             // XXX: release object
+        }
+        public void Draw(Renderer r, Graphics g)
+        {
+            // XXX: draw tool
         }
     }
 }
