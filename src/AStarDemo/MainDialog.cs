@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
@@ -34,12 +35,58 @@ namespace AStarDemo
             InitializeComponent();
             InitializeObjectSelector();
             tools = new Dictionary<ToolId, ToolContainer>();
-            InitializeToolButton(new ToolContainer(new Tools.Add(), btnAdd));
+            InitializeToolButton(new ToolContainer(new Tools.Add(CreateObject, AdjustObject), btnAdd));
             InitializeToolButton(new ToolContainer(new Tools.Select(), btnSelect));
             SetCurrentTool(currentTool, true);
             MouseWheel += OnMouseWheel;
             Root.Scene.Objects.Add(new SceneObjects.Background(Color.White));
             Root.Renderer.RenderingOutput = pbDrawingSurface;
+        }
+
+        private SceneObject CreateObject(Vector2 pos)
+        {
+            switch (btnObject.ImageIndex)
+            {
+            case 0: // vertex
+                return new SceneObjects.Vertex {Location = pos, ShowLocation = true};
+            case 1: // edge
+                return new SceneObjects.Edge(new Edge(pos, pos));
+            default: // unknown
+                return null;
+            }
+        }
+
+        private void AdjustObject(SceneObject obj, Vector2 pos, bool release)
+        {
+            switch (btnObject.ImageIndex)
+            {
+            case 0: // vertex
+            {
+                Debug.Assert(obj is SceneObjects.Vertex);
+                var vertex = (SceneObjects.Vertex)obj;
+                vertex.Location = pos;
+                if (release)
+                {
+                    vertex.Color = Color.DarkGray;
+                    Root.Scene.Objects.Add(vertex);
+                }
+                break;
+            }
+            case 1: // edge
+            {
+                Debug.Assert(obj is SceneObjects.Edge);
+                var edge = (SceneObjects.Edge)obj;
+                edge.B = pos;
+                if (release)
+                {
+                    edge.Color = Color.LightGray;
+                    Root.Scene.Objects.Add(edge);
+                }
+                break;
+            }
+            default: // unknown
+                return;
+            }
         }
 
         private void InitializeObjectSelector()
@@ -51,7 +98,7 @@ namespace AStarDemo
             btnObject.Click += (sender, e) =>
             {
                 // XXX: implement object type switching
-                // btnObject.ImageIndex = (btnObject.ImageIndex+1)%2;
+                btnObject.ImageIndex = (btnObject.ImageIndex+1)%2;
             };
         }
 
