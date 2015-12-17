@@ -86,6 +86,30 @@
             Max += s;
         }
 
+        public static bool operator==(Box2 lhs, Box2 rhs)
+        { return lhs.Min==rhs.Min && lhs.Max==rhs.Max; }
+
+        public static bool operator!=(Box2 lhs, Box2 rhs)
+        { return lhs.Min!=rhs.Min || lhs.Max!=rhs.Max; }
+        
+        public override int GetHashCode()
+        { return unchecked(Min.GetHashCode()+Max.GetHashCode()); }
+
+        public override bool Equals(object other)
+        {
+            if (other is Box2)
+            {
+                var otherBox = (Box2)other;
+                return otherBox==this;
+            }
+            return false;
+        }
+        
+        public bool Equals(Box2 other)
+        { return other==this; }
+
+        public bool IsEmpty { get { return this==Empty; } }
+        
         public static readonly Box2 Empty = new Box2(Vector2.MaxValue, Vector2.MinValue);
     }
 }
