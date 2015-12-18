@@ -42,6 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AStar.cs" />
+    <Compile Include="Dijkstra.cs" />
+    <Compile Include="EdgePath.cs" />
+    <Compile Include="Graph.cs" />
+    <Compile Include="GraphEngine.cs" />
     <Compile Include="Math\Angle.cs" />
     <Compile Include="Math\Circle.cs" />
     <Compile Include="Math\Box2.cs" />
@@ -52,8 +57,13 @@
     <Compile Include="Math\Rectangle.cs" />
     <Compile Include="Math\Vector2.cs" />
     <Compile Include="Math\VectorUtils.cs" />
+    <Compile Include="PathManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Vector.cs" />
+    <Compile Include="Vertex.cs" />
+    <Compile Include="VertexAllocator.cs" />
+    <Compile Include="VertexManager.cs" />
+    <Compile Include="VertexPath.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
