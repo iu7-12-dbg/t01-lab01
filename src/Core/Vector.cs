@@ -40,7 +40,7 @@ namespace Core
             get { return data.Length; }
             set
             {
-                if (size<value)
+                if (size>value)
                     size = value;
                 Array.Resize(ref data, value);
             }
