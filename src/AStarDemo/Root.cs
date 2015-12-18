@@ -8,6 +8,8 @@ namespace AStarDemo
     {
         public static readonly Scene Scene;
         public static readonly Renderer Renderer;
+        public static readonly Core.GraphEngine<Core.GraphEdge> GraphEngine;
+        public static readonly Core.Graph Graph;
 
         static Root()
         {
@@ -16,6 +18,8 @@ namespace AStarDemo
             Scene.Objects.Add(background);
             Renderer = new Renderer(() => { return Scene; });
             Renderer.AntialiasingEnabled = true;
+            GraphEngine = new Core.GraphEngine<Core.GraphEdge>(1024);
+            Graph = new Core.Graph(1024);
         }
 
         [STAThread]

@@ -10,6 +10,7 @@ namespace AStarDemo.SceneObjects
         public Vector2 Location;
         public float Radius;
         public bool ShowLocation;
+        public int GraphVertexId = -1;
         private static SolidBrush brush;
         private static long refCount = 0;
         

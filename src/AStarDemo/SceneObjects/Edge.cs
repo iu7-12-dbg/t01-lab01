@@ -9,6 +9,9 @@ namespace AStarDemo.SceneObjects
     {
         public Vector2 A;
         public Vector2 B;
+        // because we don't have spatial index yet :(
+        public Vertex VertexA;
+        public Vertex VertexB;
         public float Thickness;
         private static Pen pen;
         private static long refCount = 0;
