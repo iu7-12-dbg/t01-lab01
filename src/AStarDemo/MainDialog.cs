@@ -57,7 +57,11 @@ namespace AStarDemo
                 {
                     var v = obj as SceneObjects.Vertex;
                     if (v!=null) // snap to vertices only
-                        return new SceneObjects.Edge(new Edge(v.Location, v.Location));
+                    {
+                        var edge = new SceneObjects.Edge(new Edge(v.Location, v.Location));
+                        edge.VertexA = v;
+                        return edge;
+                    }
                 }
                 return null;
             }
@@ -80,6 +84,8 @@ namespace AStarDemo
                     vertex.Color = Root.Scene.Colors.Vertex;
                     vertex.ShowLocation = false;
                     Root.Scene.Objects.Add(vertex);
+                    vertex.GraphVertexId = Root.Graph.AddVertex(vertex.Location);
+                    Root.Graph.SetAccessible(vertex.GraphVertexId, true);
                 }
                 break;
             }
@@ -88,24 +94,25 @@ namespace AStarDemo
                 Debug.Assert(obj is SceneObjects.Edge);
                 var edge = (SceneObjects.Edge)obj;
                 var treshold = 3/Root.Renderer.Scale;
-                bool snap = false;
+                SceneObjects.Vertex endVertex = null;
                 foreach (var qobj in Root.Scene.Query(new Box2(pos, treshold)))
                 {
-                    var v = qobj as SceneObjects.Vertex;
-                    if (v!=null) // snap to vertices only
+                    endVertex = qobj as SceneObjects.Vertex;
+                    if (endVertex!=null) // snap to vertices only
                     {
-                        pos = v.Location;
-                        snap = true;
+                        pos = endVertex.Location;
                         break;
                     }
                 }
                 edge.B = pos;
                 if (release)
                 {
-                    if (snap)
+                    if (endVertex!=null)
                     {
                         edge.Color = Root.Scene.Colors.Edge;
+                        edge.VertexB = endVertex;
                         Root.Scene.Objects.Add(edge);
+                        Root.Graph.AddEdge(edge.VertexA.GraphVertexId, edge.VertexB.GraphVertexId);
                     }
                     else // drop invalid edge, but dispose it first
                         edge.Dispose();
@@ -210,6 +217,21 @@ namespace AStarDemo
                 break;
             }
         }
+
+        private class PmParams : Core.IPathManagerParams
+        {
+            public int MaxIterationCount { get; set; }
+            public double MaxRange { get; set; }
+            public int MaxVisitedVertexCount { get; set; }
+        }
+        /* XXX: find appropriate place for this
+            var path = new Core.Vector<int>();
+            var pmParams = new PmParams();
+            pmParams.MaxIterationCount = 1000;
+            pmParams.MaxRange = Double.MaxValue;
+            pmParams.MaxVisitedVertexCount = 100;
+            bool found = Root.GraphEngine.Search(Root.Graph, 0, 3, path, pmParams);
+        */
 
         private void pbDrawingSurface_MouseMove(object sender, MouseEventArgs args)
         {
