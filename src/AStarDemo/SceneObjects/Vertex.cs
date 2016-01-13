@@ -37,7 +37,7 @@ namespace AStarDemo.SceneObjects
                 graphics.ResetTransform();
                 var myTransform = Matrix23.FromColumns(gTransform.Elements);
                 var pos = myTransform*(Location+d);
-                var str = Location.ToString("#0.000", CultureInfo.InvariantCulture);
+                var str = GraphVertexId.ToString();
                 var strRect = graphics.MeasureString(str, renderer.Font);
                 graphics.FillRectangle(renderer.FontBackgroundBrush, (float)pos.X, (float)pos.Y,
                     strRect.Width, strRect.Height);
