@@ -15,7 +15,7 @@ namespace AStarDemo
         {
             Scene = new Scene();
             var background = new SceneObjects.Background(Color.White);
-            Scene.Objects.Add(background);
+            Scene.Objects.Add(background.Id, background);
             Renderer = new Renderer(() => { return Scene; });
             Renderer.AntialiasingEnabled = true;
             GraphEngine = new Core.GraphEngine<Core.GraphEdge>(1024);

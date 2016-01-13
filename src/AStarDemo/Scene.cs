@@ -41,22 +41,20 @@ namespace AStarDemo
         public readonly SceneOptions Options;
         public readonly SceneColors Colors;
         public ITool CurrentTool;
-        public readonly SortedSet<SceneObject> Objects;
-        private readonly SceneObjectComparer comparer;
+        public readonly SortedList<ulong, SceneObject> Objects;
         private bool disposed = false;
 
         public Scene()
         {
             Options = new SceneOptions();
             Colors = new SceneColors();
-            comparer = new SceneObjectComparer();
-            Objects = new SortedSet<SceneObject>(comparer);
+            Objects = new SortedList<ulong, SceneObject>();
         }
 
         public void ProcessObjects<T>(Action<T> action)
             where T : SceneObject
         {
-            foreach (var obj in Objects)
+            foreach (var obj in Objects.Values)
             {
                 if (obj is T)
                     action((T)obj);
@@ -65,17 +63,20 @@ namespace AStarDemo
 
         public void ProcessObjectGroup(int groupId, Action<SceneObject> action)
         {
-            foreach (var obj in Objects)
+            foreach (var obj in Objects.Values)
             {
                 if (obj.GroupId==groupId)
                     action(obj);
             }
         }
 
+        public SceneObject GetObject(ulong id)
+        { return Objects[id]; }
+
         public IEnumerable<SceneObject> Query(Box2 box)
         {
             // XXX: could be optimized
-            foreach (var obj in Objects)
+            foreach (var obj in Objects.Values)
             {
                 if (box.Contains(obj.GetBBox()))
                     yield return obj;
@@ -88,7 +89,7 @@ namespace AStarDemo
             {
                 if (disposing)
                 {
-                    foreach (var obj in Objects)
+                    foreach (var obj in Objects.Values)
                         obj.Dispose();
                     Objects.Clear();
                 }

@@ -40,7 +40,8 @@ namespace AStarDemo
             InitializeToolButton(new ToolContainer(new Tools.Select(), btnSelect));
             SetCurrentTool(currentTool, true);
             MouseWheel += OnMouseWheel;
-            Root.Scene.Objects.Add(new SceneObjects.Background(Color.White));
+            var background = new SceneObjects.Background(Color.White);
+            Root.Scene.Objects.Add(background.Id, background);
             Root.Renderer.RenderingOutput = pbDrawingSurface;
         }
 
@@ -83,8 +84,8 @@ namespace AStarDemo
                 {
                     vertex.Color = Root.Scene.Colors.Vertex;
                     vertex.ShowLocation = false;
-                    Root.Scene.Objects.Add(vertex);
-                    vertex.GraphVertexId = Root.Graph.AddVertex(vertex.Location);
+                    Root.Scene.Objects.Add(vertex.Id, vertex);
+                    vertex.GraphVertexId = Root.Graph.AddVertex(vertex.Location, vertex.Id);
                     Root.Graph.SetAccessible(vertex.GraphVertexId, true);
                 }
                 break;
@@ -111,7 +112,7 @@ namespace AStarDemo
                     {
                         edge.Color = Root.Scene.Colors.Edge;
                         edge.VertexB = endVertex;
-                        Root.Scene.Objects.Add(edge);
+                        Root.Scene.Objects.Add(edge.Id, edge);
                         Root.Graph.AddEdge(edge.VertexA.GraphVertexId, edge.VertexB.GraphVertexId);
                     }
                     else // drop invalid edge, but dispose it first

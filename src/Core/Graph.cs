@@ -32,6 +32,8 @@ namespace Core
         public int Id; // index of this vertex in array
         public Vector<GraphEdge> Edges;
         public Vector2 Location;
+        // user data
+        public ulong SceneObjectId;
     }
 
     public struct GraphEdge : IGraphEdge
@@ -118,10 +120,11 @@ namespace Core
             }
         }
 
-        public int AddVertex(Vector2 location)
+        public int AddVertex(Vector2 location, ulong sceneObjectId)
         {
             var vertex = AllocateVertex();
             VertexCount++;
+            vertex.SceneObjectId = sceneObjectId;
             vertex.Location = location;
             vertices[vertex.Id] = vertex;
             return vertex.Id;

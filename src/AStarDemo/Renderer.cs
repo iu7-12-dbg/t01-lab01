@@ -122,7 +122,7 @@ namespace AStarDemo
             graphics.MultiplyTransform(Transform);
             graphics.SmoothingMode = AntialiasingEnabled ? SmoothingMode.AntiAlias : SmoothingMode.Default;
             var currentTransform = graphics.Transform;
-            foreach (var sceneObject in scene.Objects)
+            foreach (var sceneObject in scene.Objects.Values)
             {
                 if (sceneObject.Visible)
                     sceneObject.Draw(this, graphics);
