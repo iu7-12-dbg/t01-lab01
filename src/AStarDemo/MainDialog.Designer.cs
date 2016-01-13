@@ -32,13 +32,14 @@ namespace AStarDemo
         private void InitializeComponent()
         {
             this.scToolPanel = new System.Windows.Forms.SplitContainer();
+            this.btnLocToggle = new System.Windows.Forms.Button();
             this.btnObject = new System.Windows.Forms.Button();
             this.btnSelect = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.pbDrawingSurface = new System.Windows.Forms.PictureBox();
             this.scFooter = new System.Windows.Forms.SplitContainer();
             this.lStatus = new System.Windows.Forms.Label();
-            this.btnLocToggle = new System.Windows.Forms.Button();
+            this.btnPathFinding = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.scToolPanel)).BeginInit();
             this.scToolPanel.Panel1.SuspendLayout();
             this.scToolPanel.Panel2.SuspendLayout();
@@ -61,6 +62,7 @@ namespace AStarDemo
             // 
             // scToolPanel.Panel1
             // 
+            this.scToolPanel.Panel1.Controls.Add(this.btnPathFinding);
             this.scToolPanel.Panel1.Controls.Add(this.btnLocToggle);
             this.scToolPanel.Panel1.Controls.Add(this.btnObject);
             this.scToolPanel.Panel1.Controls.Add(this.btnSelect);
@@ -78,6 +80,18 @@ namespace AStarDemo
             this.scToolPanel.SplitterDistance = 25;
             this.scToolPanel.SplitterWidth = 1;
             this.scToolPanel.TabIndex = 1;
+            // 
+            // btnLocToggle
+            // 
+            this.btnLocToggle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(185)))), ((int)(((byte)(185)))), ((int)(((byte)(185)))));
+            this.btnLocToggle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLocToggle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World, ((byte)(204)));
+            this.btnLocToggle.Location = new System.Drawing.Point(75, 4);
+            this.btnLocToggle.Name = "btnLocToggle";
+            this.btnLocToggle.Size = new System.Drawing.Size(21, 21);
+            this.btnLocToggle.TabIndex = 32;
+            this.btnLocToggle.Text = "L";
+            this.btnLocToggle.UseVisualStyleBackColor = false;
             // 
             // btnObject
             // 
@@ -162,17 +176,17 @@ namespace AStarDemo
             this.lStatus.Text = "<status>";
             this.lStatus.Visible = false;
             // 
-            // btnLocToggle
+            // btnPathFinding
             // 
-            this.btnLocToggle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(185)))), ((int)(((byte)(185)))), ((int)(((byte)(185)))));
-            this.btnLocToggle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLocToggle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World, ((byte)(204)));
-            this.btnLocToggle.Location = new System.Drawing.Point(75, 4);
-            this.btnLocToggle.Name = "btnLocToggle";
-            this.btnLocToggle.Size = new System.Drawing.Size(21, 21);
-            this.btnLocToggle.TabIndex = 32;
-            this.btnLocToggle.Text = "L";
-            this.btnLocToggle.UseVisualStyleBackColor = false;
+            this.btnPathFinding.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(185)))), ((int)(((byte)(185)))), ((int)(((byte)(185)))));
+            this.btnPathFinding.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPathFinding.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World, ((byte)(204)));
+            this.btnPathFinding.Location = new System.Drawing.Point(98, 4);
+            this.btnPathFinding.Name = "btnPathFinding";
+            this.btnPathFinding.Size = new System.Drawing.Size(21, 21);
+            this.btnPathFinding.TabIndex = 33;
+            this.btnPathFinding.Text = "P";
+            this.btnPathFinding.UseVisualStyleBackColor = false;
             // 
             // MainDialog
             // 
@@ -207,5 +221,6 @@ namespace AStarDemo
         private Button btnSelect;
         private Button btnObject;
         private Button btnLocToggle;
+        private Button btnPathFinding;
     }
 }

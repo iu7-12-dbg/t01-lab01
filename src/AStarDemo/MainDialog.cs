@@ -38,6 +38,7 @@ namespace AStarDemo
             tools = new Dictionary<ToolId, ToolContainer>();
             InitializeToolButton(new ToolContainer(new Tools.Add(CreateObject, AdjustObject), btnAdd));
             InitializeToolButton(new ToolContainer(new Tools.Select(), btnSelect));
+            InitializeToolButton(new ToolContainer(new Tools.PathFinder(CaptureVertex), btnPathFinding));
             SetCurrentTool(currentTool, true);
             MouseWheel += OnMouseWheel;
             var background = new SceneObjects.Background(Color.White);
@@ -123,6 +124,18 @@ namespace AStarDemo
             default: // unknown
                 return;
             }
+        }
+
+        private SceneObjects.Vertex CaptureVertex(Vector2 pos)
+        {
+            var treshold = 3/Root.Renderer.Scale;
+            foreach (var qobj in Root.Scene.Query(new Box2(pos, treshold)))
+            {
+                var vertex = qobj as SceneObjects.Vertex;
+                if (vertex!=null) // snap to vertices only
+                    return vertex;
+            }
+            return null;
         }
 
         private void InitializeObjectSelector()
@@ -221,21 +234,6 @@ namespace AStarDemo
                 break;
             }
         }
-
-        private class PmParams : Core.IPathManagerParams
-        {
-            public int MaxIterationCount { get; set; }
-            public double MaxRange { get; set; }
-            public int MaxVisitedVertexCount { get; set; }
-        }
-        /* XXX: find appropriate place for this
-            var path = new Core.Vector<int>();
-            var pmParams = new PmParams();
-            pmParams.MaxIterationCount = 1000;
-            pmParams.MaxRange = Double.MaxValue;
-            pmParams.MaxVisitedVertexCount = 100;
-            bool found = Root.GraphEngine.Search(Root.Graph, 0, 3, path, pmParams);
-        */
 
         private void pbDrawingSurface_MouseMove(object sender, MouseEventArgs args)
         {
