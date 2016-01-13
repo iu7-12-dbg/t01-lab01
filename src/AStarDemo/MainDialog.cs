@@ -155,9 +155,12 @@ namespace AStarDemo
         private void InitializeToolButton(ToolContainer toolContainer)
         {
             var list = new ImageList();
-            list.Images.AddStrip(toolContainer.Tool.Icons);
-            toolContainer.Button.ImageList = list;
-            toolContainer.Button.Text = string.Empty;
+            if (toolContainer.Tool.Icons!=null)
+            {
+                list.Images.AddStrip(toolContainer.Tool.Icons);
+                toolContainer.Button.ImageList = list;
+                toolContainer.Button.Text = string.Empty;
+            }
             toolContainer.Button.Click += (sender, e) => SetCurrentTool(toolContainer.Tool.Id);
             tools.Add(toolContainer.Tool.Id, toolContainer);
         }
