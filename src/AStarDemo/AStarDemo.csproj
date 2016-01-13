@@ -63,6 +63,7 @@
     <Compile Include="SceneObjects\Edge.cs" />
     <Compile Include="SceneObjects\Vertex.cs" />
     <Compile Include="Tools\Add.cs" />
+    <Compile Include="Tools\PathFinder.cs" />
     <Compile Include="Tools\Select.cs" />
     <EmbeddedResource Include="MainDialog.resx">
       <DependentUpon>MainDialog.cs</DependentUpon>

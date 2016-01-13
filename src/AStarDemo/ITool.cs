@@ -15,6 +15,7 @@ namespace AStarDemo
     {
         Add,
         Select,
+        PathFinder,
     }
 
     internal interface ITool
