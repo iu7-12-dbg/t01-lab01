@@ -11,7 +11,7 @@ namespace Core
         public VertexAllocator(int reserveSize)
         { Vertices = new Vector<Vertex<TEdge>>(reserveSize); }
         public void Initialize()
-        {}
+        { Vertices.Count = 0; }
         public int VisitedVertexCount { get { return Vertices.Count; } }
         public Vertex<TEdge> CreateVertex()
         {
