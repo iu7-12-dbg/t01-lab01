@@ -57,9 +57,7 @@ namespace AStarDemo.Tools
             pmParams.MaxVisitedVertexCount = 100;
             found = Root.GraphEngine.Search(Root.Graph,
                 startVertex.GraphVertexId, endVertex.GraphVertexId, path, pmParams);
-            if (found)
-                path.Push(endVertex.GraphVertexId);
-            edgePath.EnsureCapacity(path.Count);
+            edgePath.EnsureCapacity(path.Count-1);
         }
 
         public void Draw(Renderer r, Graphics g)
@@ -78,7 +76,7 @@ namespace AStarDemo.Tools
             }
             ulong lastVertexId = 0;
             int lastIndex = 0;
-            for (int i = 1; i<path.Count-1; i++)
+            for (int i = 0; i<path.Count-1; i++)
             {
                 var gid1 = Root.Graph.GetVertex(path[i]).SceneObjectId;
                 var gid2 = Root.Graph.GetVertex(path[i+1]).SceneObjectId;

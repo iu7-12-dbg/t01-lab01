@@ -19,7 +19,6 @@ namespace Core
             t1 = best;
             path[--i] = best.Index;
             t2 = t1.Back;
-            i = path.Count;
             for (i--; t2!=null; t2 = t2.Back, i--)
                 path[i] = t2.Index;
         }
