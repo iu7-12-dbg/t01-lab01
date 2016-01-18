@@ -60,6 +60,8 @@ namespace Core
 
         public void Push(T value)
         {
+            if (Capacity == 0)
+                ++Capacity;
             if (Capacity==size)
                 Capacity *= 2;
             data[size++] = value;
