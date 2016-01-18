@@ -66,7 +66,7 @@ namespace Core
         }
 
         public T Pop()
-        { return data[size--]; }
+        { return data[--size]; }
 
         public T[] Data { get { return data; } }
     }
