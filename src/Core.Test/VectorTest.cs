@@ -9,7 +9,7 @@ namespace Core.Tests
         [TestMethod]
         public void TestPush()
         {
-            var vk = new Vector<int>(1);
+            var vk = new Vector<int>();
             vk.Push(1);
             vk.Push(2);
             vk.Push(3);
